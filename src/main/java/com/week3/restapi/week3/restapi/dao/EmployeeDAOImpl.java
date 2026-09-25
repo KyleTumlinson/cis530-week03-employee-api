@@ -34,6 +34,6 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
     @Override
     public void delete(Employee employee) {
-
+        entityManager.remove(employee);
     }
 }

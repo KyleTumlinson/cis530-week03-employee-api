@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeServiceInter {
@@ -49,7 +51,11 @@ public class EmployeeServiceImpl implements EmployeeServiceInter {
         return employeeDAO.save(employee);
     }
 
+    @Transactional
     @Override
     public void deleteById(int id) {
+        Employee found =  employeeDAO.findById(id)
+                .orElseThrow(() -> new RuntimeException("Employee not found" + id));
+        employeeDAO.delete(found);
     }
 }
